@@ -19,6 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('display_name')->nullable();
             $table->string('profile_pic_url')->nullable();
             $table->string('occupation')->nullable();
+            $table->string('contact_number')->nullable();
             $table->string('bio')->nullable();
             $table->string('first_name');
             $table->string('last_name');
