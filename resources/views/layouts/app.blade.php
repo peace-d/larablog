@@ -18,6 +18,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    @include('shared.icons_symbol')
 </head>
 <body>
     <div id="app">
