@@ -20,7 +20,13 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <style>
+        img {
+            max-width: 100%;
+        }
+    </style>
     @include('shared.icons_symbol')
+
 </head>
 <body>
     <div id="app">
