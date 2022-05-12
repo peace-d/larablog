@@ -17,19 +17,22 @@
                                     <div class="card overflow-hidden">
                                         <!-- Cover image -->
                                         <div class="h-50px"
-                                             style="background-image:url(assets/images/bg/01.jpg); background-position: center; background-size: cover; background-repeat: no-repeat;">
+                                             style="background-image:url({{ asset('images/lines-gb6bd8abdf_1920.jpg') }});
+                                                 background-position: center;
+                                                 background-size: cover;
+                                                 background-repeat: no-repeat;">
                                         </div>
                                         <!-- Card body START -->
                                         <div class="card-body pt-0">
                                             <div class="text-center">
                                                 <!-- Avatar -->
                                                 <div class="avatar avatar-lg mt-n5 mb-3">
-                                                    <a href="#!">
-                                                        <img class="avatar-img rounded border border-white border-3" src="assets/images/avatar/07.jpg" alt="">
+                                                    <a href="{{ route('app_edit_user') }}">
+                                                        <img class="avatar-img rounded border border-white border-3 img-fluid" src="{{ asset('images/no_image_available.png') }}" alt="{{ Auth::user()->first_name }} {{ Auth::user()->last_name }} profile pic">
                                                     </a>
                                                 </div>
                                                 <!-- Info -->
-                                                <h5 class="mb-0"> <a href="#!">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</a> </h5>
+                                                <h5 class="mb-0"> <a href="{{ route('app_edit_user') }}">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</a> </h5>
                                                 <small>{{ Auth::user()->occupation }}</small>
                                                 <p class="mt-3">{{ Auth::user()->bio }}</p>
 
@@ -93,7 +96,7 @@
                                         <!-- Card body END -->
                                         <!-- Card footer -->
                                         <div class="card-footer text-center py-2">
-                                            <a class="btn btn-link btn-sm" href="my-profile.html">View Profile </a>
+                                            <a class="btn btn-link btn-sm" href="{{ route('app_edit_user') }}">View Profile </a>
                                         </div>
                                     </div>
                                 @endauth
@@ -127,44 +130,11 @@
 
                 <div class="col-md-8 col-lg-6 vstack gap-4">
                     @auth
-                    <div class="card card-body">
-                        <div class="d-flex mb-3">
-                            <!-- Avatar -->
-                            <div class="avatar avatar-xs me-2">
-                                <a href="#"> <img class="avatar-img rounded-circle" src="assets/images/avatar/03.jpg" alt=""> </a>
+                        <div class="card">
+                            <div class="card card-body">
+                                <a href="{{ route('app_get_all_my_posts') }}" class="btn btn-primary">My Posts</a>
                             </div>
-                            <!-- Post input -->
-                            <form class="w-100">
-                                <textarea class="form-control pe-4 border-0" rows="2" data-autoresize=""
-                                          placeholder="Share your thoughts..."></textarea>
-                            </form>
                         </div>
-                        <!-- Share feed toolbar START -->
-                        <ul class="nav nav-pills nav-stack small fw-normal">
-                            <li class="nav-item">
-                                <a class="nav-link bg-light py-1 px-2 mb-0" href="#!" data-bs-toggle="modal"
-                                   data-bs-target="#modalCreateFeed"> <i class="bi bi-emoji-smile-fill text-warning pe-2"></i>Feeling
-                                    /Activity</a>
-                            </li>
-                            <li class="nav-item dropdown ms-lg-auto">
-                                <a class="nav-link bg-light py-1 px-2 mb-0" href="#" id="feedActionShare" data-bs-toggle="dropdown"
-                                   aria-expanded="false">
-                                    <i class="bi bi-three-dots"></i>
-                                </a>
-                                <!-- Dropdown menu -->
-                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="feedActionShare">
-                                    <li><a class="dropdown-item" href="#"> <i class="bi bi-envelope fa-fw pe-2"></i>Create a poll</a></li>
-                                    <li><a class="dropdown-item" href="#"> <i class="bi bi-bookmark-check fa-fw pe-2"></i>Ask a question
-                                        </a></li>
-                                    <li>
-                                        <hr class="dropdown-divider">
-                                    </li>
-                                    <li><a class="dropdown-item" href="#"> <i class="bi bi-pencil-square fa-fw pe-2"></i>Help</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                        <!-- Share feed toolbar END -->
-                    </div>
                     @endauth
 
 
@@ -392,15 +362,14 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <!-- Add Feed -->
+                <div id="post_status_indicator"></div>
                 <div class="d-flex mb-3">
-                    <!-- Avatar -->
-                    <div class="avatar avatar-xs me-2">
-                        <img class="avatar-img rounded-circle" src="assets/images/avatar/03.jpg" alt="">
-                    </div>
-                    <!-- Feed box  -->
                     <form class="w-100">
-                        <textarea class="form-control pe-4 fs-3 lh-1 border-0" rows="4"
+                        <input type="hidden" name="user_id" id="user_id" value="{{ auth()->user()->id }}">
+                        <input type="hidden" name="_token" id="_token" value="{{ csrf_token() }}" />
+
+                        <input type="text" class="form-control" placeholder="Title" name="title">
+                        <textarea class="form-control pe-4 fs-3 lh-1 border-0" rows="4" name="content" id="content"
                                   placeholder="Share your thoughts..." autofocus=""></textarea>
                     </form>
                 </div>
@@ -411,17 +380,13 @@
             <div class="modal-footer row justify-content-between">
                 <!-- Select -->
                 <div class="col-lg-3">
-                    <select class="form-select">
-                        <option selected value="1">Publish</option>
-                        <option selected value="2">Draft</option>
+                    <select class="form-select" id="status_id">
                     </select>
                 </div>
                 <div class="col-lg-8 text-sm-end">
-                    <button type="button" class="btn btn-success-soft">Post</button>
+                    <button type="button" class="btn btn-success-soft" onclick="savePost()">Post</button>
                 </div>
             </div>
-            <!-- Modal feed footer -->
-
         </div>
     </div>
 </div>
