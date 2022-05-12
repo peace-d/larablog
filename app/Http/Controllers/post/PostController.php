@@ -72,4 +72,53 @@ class PostController extends Controller
 
         return redirect()->route('app_get_all_my_posts')->with('success', 'Post deleted.');
     }
+
+    public function viewPost(Request $request) {
+        $post = Post::findOrFail($request->post_id);
+        return view('post.view_post', ['post' => $post, 'title' => $post->title]);
+    }
+
+    public function editPost(Request $request) {
+        $post = Post::findOrFail($request->post_id);
+        return view('post.edit_post', [
+            'post' => $post,
+            'statuses' => Status::all(),
+            'categories' => Category::all(),
+            'title' => 'Edit ' . $post->title
+        ]);
+    }
+
+    public function updatePost(Request $request)
+    {
+        $post = Post::findOrFail($request->post_id);
+
+        if ($post->user_id !== auth()->user()->id) {
+            return redirect()->route('app_get_all_my_posts')->with('error', 'This post doesnt not belong to you.');
+        }
+
+        if (isset($request->category_id) && $request->category_id === 'new_category_action') {
+            $request->validate(['new_category' => 'required']);
+
+            $newCategory = new Category();
+
+            $newCategory->name = $request->new_category;
+
+            $newCategory->save();
+
+            $request->merge(['category_id' => $newCategory->id]);
+        }
+
+        $validated = $request->validate([
+            'title' => 'required',
+            'user_id' => 'required|numeric',
+            'status_id' => 'required|numeric',
+            'content' => 'required',
+            'category_id' => 'required|numeric'
+        ]);
+
+        $post->update($validated);
+
+        return redirect()->route('app_view_post', ['post_id' => $post->id ])->with('success', 'New post has been updated');
+
+    }
 }
