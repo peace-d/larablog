@@ -20,9 +20,10 @@
                 @endauth
 
 
+                <h2>My Posts</h2>
 
+                @foreach($posts as $post)
                 <div class="card">
-
                     <div class="card-header border-0 pb-0">
                         <div class="d-flex align-items-center justify-content-between">
                             <div class="d-flex align-items-center">
@@ -31,10 +32,10 @@
                                 </div>
                                 <div>
                                     <div class="nav nav-divider">
-                                        <h6 class="nav-item card-title mb-0"> <a href="#!"> Lori Ferguson </a></h6>
-                                        <span class="nav-item small"> 2hr</span>
+                                        <h6 class="nav-item card-title mb-0"> <a href=""> Nkululeko Dube</a></h6>
+                                        <span class="nav-item small ml-1"> {{ $post->created_at }}</span>
                                     </div>
-                                    <p class="mb-0 small">Web Developer at Webestica</p>
+{{--                                    <p class="mb-0 small">{{ $post->title }}</p>--}}
                                 </div>
                             </div>
                             <div class="dropdown">
@@ -43,71 +44,36 @@
                                     <i class="bi bi-three-dots"></i>
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="cardFeedAction">
-                                    <li><a class="dropdown-item" href="#"> <i class="bi bi-bookmark fa-fw pe-2"></i>Save post</a></li>
-                                    <li><a class="dropdown-item" href="#"> <i class="bi bi-person-x fa-fw pe-2"></i>Unfollow lori
-                                            ferguson </a></li>
-                                    <li><a class="dropdown-item" href="#"> <i class="bi bi-x-circle fa-fw pe-2"></i>Hide post</a></li>
-                                    <li><a class="dropdown-item" href="#"> <i class="bi bi-slash-circle fa-fw pe-2"></i>Block</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('app_view_post', $post->id) }}"> <i class="bi bi-eye fa-fw pe-2"></i>View Post</a></li>
+                                    @if($post->user_id === auth()->user()->id)
+                                        <li><a class="dropdown-item" href="{{ route('app_edit_post', $post->id) }}"> <i class="bi bi-bookmark fa-fw pe-2"></i>Edit Post</a></li>
+                                        <li>
+                                            <form id="delete-form" action="{{ route('app_delete_post', $post->id) }}" method="POST">
+                                                @csrf
+                                                {{ method_field('DELETE') }}
+                                                <button class="dropdown-item"> <i class="bi bi-backspace fa-fw pe-2"></i>Delete Post</button>
+                                            </form>
+                                        </li>
+
+                                    @endif
                                     <li>
                                         <hr class="dropdown-divider">
                                     </li>
-                                    <li><a class="dropdown-item" href="#"> <i class="bi bi-flag fa-fw pe-2"></i>Report post</a></li>
+                                    <li><a class="dropdown-item disabled" href="#"> <i class="bi bi-flag fa-fw pe-2"></i>Report post (Coming soon)</a></li>
                                 </ul>
                             </div>
                         </div>
                     </div>
                     <div class="card-body">
-                        <p>I'm thrilled to share that I've completed a graduate certificate course in project management with the
-                            president's honor roll.</p>
-                        <img class="card-img" src="assets/images/post/3by2/01.jpg" alt="Post">
+                        <p>{{$post->title}}</p>
                     </div>
                 </div>
+                @endforeach
 
 
             </div>
 
             <div class="col-lg-3">
-                <div class="card">
-                    <!-- Card header START -->
-                    <div class="card-header border-0">
-                        <h5 class="card-title mb-0">Trending Posts</h5>
-                    </div>
-                    <!-- Card header END -->
-                    <!-- Card body START -->
-                    <div class="card-body">
-                        <!-- News item -->
-                        <div class="mb-3">
-                            <h6 class="mb-0"><a href="blog-details.html">Ten questions you should answer truthfully</a></h6>
-                            <small>2hr</small>
-                        </div>
-                        <!-- News item -->
-                        <div class="mb-3">
-                            <h6 class="mb-0"><a href="blog-details.html">Five unbelievable facts about money</a></h6>
-                            <small>3hr</small>
-                        </div>
-                        <!-- News item -->
-                        <div class="mb-3">
-                            <h6 class="mb-0"><a href="blog-details.html">Best Pinterest Boards for learning about business</a></h6>
-                            <small>4hr</small>
-                        </div>
-                        <!-- News item -->
-                        <div class="mb-3">
-                            <h6 class="mb-0"><a href="blog-details.html">Skills that you can learn from business</a></h6>
-                            <small>6hr</small>
-                        </div>
-                        <!-- Load more comments -->
-                        <a href="#!" role="button" class="btn btn-link btn-link-loader btn-sm text-secondary d-flex align-items-center"
-                           data-bs-toggle="button" aria-pressed="true">
-                            <div class="spinner-dots me-2">
-                                <span class="spinner-dot"></span>
-                                <span class="spinner-dot"></span>
-                                <span class="spinner-dot"></span>
-                            </div>
-                            View all latest news
-                        </a>
-                    </div>
-                    <!-- Card body END -->
-                </div>
             </div>
         </div>
     </div>
