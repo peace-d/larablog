@@ -24,13 +24,18 @@ class CreateStatusesTable extends Migration
         $defaultStatuses = [
             [
                 'id' => 1,
-                'name' => 'Pending',
-                'description' => 'Awaiting some for of action.'
-            ],
-            [
-                'id' => 2,
                 'name' => 'Active',
                 'description' => 'Active status.'
+            ],
+            [
+            'id' => 2,
+            'name' => 'Pending',
+            'description' => 'Awaiting some for of action.'
+            ],
+            [
+                'id' => 3,
+                'name' => 'Draft',
+                'description' => 'Awaiting some for of action.'
             ]
         ];
 
