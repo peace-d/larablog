@@ -83,4 +83,20 @@
         </main>
     </div>
 </body>
+
+<script src="//cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
+<script type="text/javascript">
+    // $(document).ready(function () {
+    //     $('.ckeditor').ckeditor();
+    // });
+
+    CKEDITOR.replace('content', {
+        filebrowserUploadUrl: "{{route('ckeditor.image-upload', ['_token' => csrf_token() ])}}",
+        filebrowserUploadMethod: 'form'
+    });
+
+    CKEDITOR.config.width = '100%';
+</script>
+
+
 </html>
