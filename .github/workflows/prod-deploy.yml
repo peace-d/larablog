@@ -31,6 +31,8 @@ jobs:
             cd /var/www/laravel.com
             pwd
             composer install
+            sudo chmod -R o+w bootstrap/cache
+            sudo chmod -R o+w storage
             php artisan key:generate
             php artisan config:cache
             php artisan route:cache
