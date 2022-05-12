@@ -29,6 +29,13 @@ class User extends Authenticatable
         'password',
     ];
 
+    public $rules = [
+        'first_name' => 'required|max:255',
+        'last_name' => 'required|max:255',
+        'display_name' => 'required|unique:users|max:20',
+        'email' => 'required|unique:users|max:20',
+    ];
+
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -47,4 +54,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
 }
