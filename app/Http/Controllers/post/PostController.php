@@ -54,4 +54,22 @@ class PostController extends Controller
             'title' => 'My Posts'
         ]);
     }
+
+    public function deletePost(Request $request)
+    {
+        $post = Post::findOrFail($request->post_id);
+
+        if (!$post instanceof Post) {
+            return redirect()->route('app_get_all_my_posts')->with('error', 'Could not find product with id ' . $request->post_id);
+        }
+
+        if ($post->user_id !== auth()->user()->id) {
+            return redirect()->route('app_get_all_my_posts')->with('error', 'This post doesnt not belong to you.');
+        }
+
+        $post->status_id = Status::STATUS_DELETE_ID;
+        $post->save();
+
+        return redirect()->route('app_get_all_my_posts')->with('success', 'Post deleted.');
+    }
 }
