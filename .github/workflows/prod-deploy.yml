@@ -1,0 +1,34 @@
+name: Production Deploy
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  prepare-project:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: Deploy To Production
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.AWS_HOST }}
+          username: ${{ secrets.AWS_SSH_USERNAME }}
+          key: ${{ secrets.AWS_GITHUB_SSH_PVT_KEY }}
+          passphrase: ${{ secrets.AWS_GITHUB_SSH_PASSWORD }}
+          port: 22
+          source: "*"
+          target: "/var/www/laravel.com/"
+      - name: Prepare Code
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.AWS_HOST }}
+          username: ${{ secrets.AWS_SSH_USERNAME }}
+          key: ${{ secrets.AWS_GITHUB_SSH_PVT_KEY }}
+          passphrase: ${{ secrets.AWS_GITHUB_SSH_PASSWORD }}
+          port: 22
+          script: |
+            cd /var/www/laravel.com
+            pwd
+            composer install
+            bin/console cache:clear
