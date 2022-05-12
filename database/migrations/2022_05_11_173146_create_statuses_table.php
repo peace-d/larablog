@@ -36,6 +36,11 @@ class CreateStatusesTable extends Migration
                 'id' => 3,
                 'name' => 'Draft',
                 'description' => 'Awaiting some for of action.'
+            ],
+            [
+                'id' => 4,
+                'name' => 'Deleted',
+                'description' => 'Removed from user system'
             ]
         ];
 
