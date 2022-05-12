@@ -31,4 +31,7 @@ jobs:
             cd /var/www/laravel.com
             pwd
             composer install
-            bin/console cache:clear
+            php artisan key:generate
+            php artisan config:cache
+            php artisan route:cache
+            php artisan view:cache
