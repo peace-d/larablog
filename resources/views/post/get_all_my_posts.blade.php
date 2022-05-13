@@ -30,7 +30,7 @@
                                 <div>
                                     <div class="nav nav-divider">
                                         <h6 class="nav-item card-title mb-0"></h6>
-                                        <span class="nav-item small ml-1"> {{$post->category->name }} - {{ $post->created_at }}</span>
+                                        <span class="nav-item small ml-1"> {{$post->category->name }} - {{ $post->created_at }}  - {{ $post->status->name }}</span>
                                     </div>
 {{--                                    <p class="mb-0 small">{{ $post->title }}</p>--}}
                                 </div>
