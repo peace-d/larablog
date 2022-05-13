@@ -28,99 +28,39 @@
                                             <!-- Avatar -->
                                             <div class="avatar avatar-lg mt-n5 mb-3">
                                                 <a href="{{ route('app_edit_user') }}">
-                                                    <img class="avatar-img rounded border border-white border-3 img-fluid" src="{{ asset('images/no_image_available.png') }}" alt="{{ Auth::user()->first_name }} {{ Auth::user()->last_name }} profile pic">
+                                                    <img class="avatar-img rounded border border-white border-3 img-fluid" src="{{ asset('images/no_image_available.png') }}" alt="{{ $post->user->first_name }} {{ $post->user->last_name }} profile pic">
                                                 </a>
                                             </div>
                                             <!-- Info -->
-                                            <h5 class="mb-0"> <a href="{{ route('app_edit_user') }}">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</a> </h5>
-                                            <small>{{ Auth::user()->occupation }}</small>
-                                            <p class="mt-3">{{ Auth::user()->bio }}</p>
+                                            <h5 class="mb-0"> <a href="{{ route('app_edit_user') }}">{{ $post->user->first_name }} {{ $post->user->last_name }}</a> </h5>
+                                            <small>{{ $post->user->occupation }}</small>
+                                            <p class="mt-3">{{ $post->user->bio }}</p>
 
                                             <!-- User stat START -->
                                             <div class="hstack gap-2 gap-xl-3 justify-content-center">
                                                 <div>
-                                                    <h6 class="mb-0">256</h6>
-                                                    <small>Post</small>
                                                 </div>
                                                 <div class="vr"></div>
                                                 <div>
-                                                    <h6 class="mb-0">2.5K</h6>
-                                                    <small>Followers</small>
+                                                    <h6 class="mb-0">{{ count($post->user->posts) }}</h6>
+                                                    <small>Posts</small>
                                                 </div>
                                                 <div class="vr"></div>
                                                 <div>
-                                                    <h6 class="mb-0">365</h6>
-                                                    <small>Following</small>
                                                 </div>
                                             </div>
                                         </div>
 
                                         <hr>
-
-                                        <!-- Side Nav START -->
-                                        <ul class="nav nav-link-secondary flex-column fw-bold gap-2">
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="my-profile.html"> <img class="me-2 h-20px fa-fw"
-                                                                                                 src="assets/images/icon/home-outline-filled.svg" alt=""><span>Feed </span></a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="my-profile-connections.html"> <img class="me-2 h-20px fa-fw"
-                                                                                                             src="assets/images/icon/person-outline-filled.svg" alt=""><span>Connections
-                                                        </span></a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="blog.html"> <img class="me-2 h-20px fa-fw"
-                                                                                           src="assets/images/icon/earth-outline-filled.svg" alt=""><span>Latest News
-                                                        </span></a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="events.html"> <img class="me-2 h-20px fa-fw"
-                                                                                             src="assets/images/icon/calendar-outline-filled.svg" alt=""><span>Events </span></a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="groups.html"> <img class="me-2 h-20px fa-fw"
-                                                                                             src="assets/images/icon/chat-outline-filled.svg" alt=""><span>Groups </span></a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="notifications.html"> <img class="me-2 h-20px fa-fw"
-                                                                                                    src="assets/images/icon/notification-outlined-filled.svg" alt=""><span>Notifications
-                                                        </span></a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="settings.html"> <img class="me-2 h-20px fa-fw"
-                                                                                               src="assets/images/icon/cog-outline-filled.svg" alt=""><span>Settings </span></a>
-                                            </li>
-                                        </ul>
-                                        <!-- Side Nav END -->
                                     </div>
                                     <!-- Card body END -->
                                     <!-- Card footer -->
                                     <div class="card-footer text-center py-2">
-                                        <a class="btn btn-link btn-sm" href="{{ route('app_edit_user') }}">View Profile </a>
+{{--                                        <a class="btn btn-link btn-sm" href="{{ route('app_edit_user') }}">View Profile </a>--}}
                                     </div>
                                 </div>
                         @endauth
 
-                        <!-- Helper link START -->
-                            <ul class="nav small mt-4 justify-content-center lh-1">
-                                <li class="nav-item">
-                                    <a class="nav-link" href="my-profile-about.html">About</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="settings.html">Settings</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" target="_blank" href="#">Support </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#l">Help</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">Privacy &amp; terms</a>
-                                </li>
-                            </ul>
-                            <!-- Helper link END -->
-                            <!-- Copyright -->
                             <p class="small text-center mt-1">©2022 <a class="text-body" target="_blank"
                                                                        href="https://www.webestica.com/"> LaraBlog </a></p>
                         </div>
