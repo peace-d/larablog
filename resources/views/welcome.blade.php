@@ -103,7 +103,7 @@
                             <div class="d-flex align-items-center">
                                 <div>
                                     <div class="nav nav-divider">
-                                        <h6 class="nav-item card-title mb-0">Nkululeko Dube</h6> &nbsp;
+                                        <h6 class="nav-item card-title mb-0">{{ $post->user->first_name }}</h6> &nbsp;
                                         <span class="nav-item small ml-1"> {{ $post->created_at }}</span>
                                     </div>
                                 </div>
