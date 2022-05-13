@@ -86,7 +86,7 @@
                                 </div>
                                 <div>
                                     <div class="nav nav-divider">
-                                        <h6 class="nav-item card-title mb-0"> <small>{{ $post->category->name }} &nbsp; &nbsp; </small></h6>
+                                        <h6 class="nav-item card-title mb-0"> <small>{{ $post->category->name }} &nbsp; &nbsp;</small></h6>
                                         <span class="nav-item small ml-1"> {{ $post->created_at }}</span>
                                     </div>
                                     {{--                                    <p class="mb-0 small">{{ $post->title }}</p>--}}
