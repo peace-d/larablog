@@ -38,7 +38,7 @@ class HomeController extends Controller
         }
 
         return view('welcome', [
-            'posts' => Post::where( ['status_id' => Status::STATUS_ACTIVE_ID] )->get(),
+            'posts' => Post::where( ['status_id' => Status::STATUS_ACTIVE_ID] )->orderBy('created_at', 'desc')->get(),
             'categories' => Category::all(),
             'loggedUser' => $loggedUser
         ]);

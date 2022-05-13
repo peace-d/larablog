@@ -50,7 +50,7 @@ class PostController extends Controller
     public function getAllMyPosts(Request $request)
     {
         return view('post.get_all_my_posts', [
-            'posts' => Post::where(['user_id' => auth()->user()->id])->get(),
+            'posts' => Post::where(['user_id' => auth()->user()->id])->orderBy('created_at', 'desc')->get(),
             'title' => 'My Posts'
         ]);
     }
