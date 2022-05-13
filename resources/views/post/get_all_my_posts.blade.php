@@ -27,13 +27,10 @@
                     <div class="card-header border-0 pb-0">
                         <div class="d-flex align-items-center justify-content-between">
                             <div class="d-flex align-items-center">
-                                <div class="avatar avatar-story me-2">
-                                    <a href="#!"> <img class="avatar-img rounded-circle" src="assets/images/avatar/04.jpg" alt=""> </a>
-                                </div>
                                 <div>
                                     <div class="nav nav-divider">
-                                        <h6 class="nav-item card-title mb-0"> <a href=""> Nkululeko Dube</a></h6>
-                                        <span class="nav-item small ml-1"> {{ $post->created_at }}</span>
+                                        <h6 class="nav-item card-title mb-0"></h6>
+                                        <span class="nav-item small ml-1"> {{$post->category->name }} - {{ $post->created_at }}</span>
                                     </div>
 {{--                                    <p class="mb-0 small">{{ $post->title }}</p>--}}
                                 </div>
